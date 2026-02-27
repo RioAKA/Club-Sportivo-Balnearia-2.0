@@ -42,9 +42,14 @@ wp-content/database/*.sqlite
 wp-content/database/*.sqlite-shm
 wp-content/database/*.sqlite-wal
 
-# Plugins instalados desde el panel WP (no versionar binarios)
+# Plugins por defecto de WordPress (no necesarios para el proyecto)
 wp-content/plugins/akismet/
+wp-content/plugins/hello.php
 wp-content/plugins/sqlite-database-integration/
+
+# Temas por defecto de WordPress (no necesarios — solo se versiona el nuestro y el padre)
+wp-content/themes/twentytwentyfive/
+wp-content/themes/twentytwentythree/
 
 # Drop-in generado (se regenera desde el plugin SQLite)
 wp-content/db.php
