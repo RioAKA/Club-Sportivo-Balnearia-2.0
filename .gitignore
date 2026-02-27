@@ -25,7 +25,7 @@ debug.log
 # Volúmenes de Docker
 docker-volumes/
 
-# WordPress core (se descarga vía Docker)
+# WordPress core (se descarga automáticamente — no versionar)
 wp-admin/
 wp-includes/
 wp-*.php
@@ -33,6 +33,25 @@ xmlrpc.php
 index.php
 license.txt
 readme.html
+
+# WordPress config (contiene credenciales)
+wp-config.php
+
+# Base de datos SQLite (generada automáticamente)
+wp-content/database/*.sqlite
+wp-content/database/*.sqlite-shm
+wp-content/database/*.sqlite-wal
+
+# Plugins instalados desde el panel WP (no versionar binarios)
+wp-content/plugins/akismet/
+wp-content/plugins/sqlite-database-integration/
+
+# Drop-in generado (se regenera desde el plugin SQLite)
+wp-content/db.php
+
+# Otros archivos de WordPress generados
+wp-content/upgrade/
+wp-content/languages/
 
 # IDEs
 .idea/

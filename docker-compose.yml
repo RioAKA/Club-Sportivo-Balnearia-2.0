@@ -1,12 +1,9 @@
-version: '3.8'
-
 services:
 
   db:
     image: mysql:8.0
     container_name: csb_mysql
     restart: unless-stopped
-    env_file: .env
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -16,24 +13,32 @@ services:
       - db_data:/var/lib/mysql
     networks:
       - csb_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   wordpress:
     image: wordpress:latest
     container_name: csb_wordpress
     restart: unless-stopped
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8080:80"
-    env_file: .env
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+      WORDPRESS_DEBUG: ${WORDPRESS_DEBUG:-0}
+      WORDPRESS_DEBUG_LOG: ${WORDPRESS_DEBUG_LOG:-0}
     volumes:
-      - ./wp-content:/var/www/html/wp-content
+      - wp_content:/var/www/html/wp-content
+      - ./wp-content/themes/sportivo-balnearia:/var/www/html/wp-content/themes/sportivo-balnearia
     networks:
       - csb_network
 
@@ -52,8 +57,29 @@ services:
     networks:
       - csb_network
 
+  wpcli:
+    image: wordpress:cli
+    container_name: csb_wpcli
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+    volumes:
+      - wp_content:/var/www/html/wp-content
+      - ./wp-content/themes/sportivo-balnearia:/var/www/html/wp-content/themes/sportivo-balnearia
+    networks:
+      - csb_network
+    profiles:
+      - tools
+
 volumes:
   db_data:
+  wp_content:
 
 networks:
   csb_network:
