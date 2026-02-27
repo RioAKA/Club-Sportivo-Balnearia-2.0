@@ -1,0 +1,41 @@
+# Variables de entorno (NO subir credenciales)
+.env
+
+# Archivos de subida de WordPress
+wp-content/uploads/
+
+# Directorio de actualización de WordPress
+wp-content/upgrade/
+
+# Caché
+wp-content/cache/
+
+# Backups
+wp-content/backup-db/
+wp-content/backups/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+debug.log
+
+# Volúmenes de Docker
+docker-volumes/
+
+# WordPress core (se descarga vía Docker)
+wp-admin/
+wp-includes/
+wp-*.php
+xmlrpc.php
+index.php
+license.txt
+readme.html
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo

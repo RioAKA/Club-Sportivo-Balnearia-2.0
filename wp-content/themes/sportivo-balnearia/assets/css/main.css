@@ -1,0 +1,443 @@
+/*
+ * Estilos principales — Club Sportivo Balnearia
+ * Versión: 1.0.0
+ *
+ * NOTA: Los colores de la paleta se actualizarán con las
+ * imágenes de referencia que adjunte el usuario.
+ */
+
+/* ==========================================================================
+   Variables CSS — Paleta provisional del club
+   ========================================================================== */
+:root {
+    /* Colores principales (placeholders — se actualizarán con referencia visual) */
+    --csb-color-primary:        #1a3a6e;   /* Azul oscuro */
+    --csb-color-secondary:      #e8c840;   /* Amarillo/dorado */
+    --csb-color-accent:         #c0392b;   /* Rojo acento */
+    --csb-color-dark:           #0d1b2a;   /* Casi negro */
+    --csb-color-light:          #f4f6f8;   /* Gris muy claro */
+    --csb-color-white:          #ffffff;
+
+    /* Deportes — colores de identificación */
+    --csb-futbol-color:         #2ecc71;   /* Verde */
+    --csb-basquet-color:        #e67e22;   /* Naranja */
+    --csb-voley-color:          #3498db;   /* Azul claro */
+    --csb-patin-color:          #9b59b6;   /* Violeta */
+    --csb-padel-color:          #1abc9c;   /* Verde agua */
+
+    /* Tipografía */
+    --csb-font-heading:         'Georgia', serif;
+    --csb-font-body:            -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --csb-font-size-base:       16px;
+
+    /* Espaciado */
+    --csb-spacing-xs:           0.5rem;
+    --csb-spacing-sm:           1rem;
+    --csb-spacing-md:           2rem;
+    --csb-spacing-lg:           3rem;
+    --csb-spacing-xl:           5rem;
+
+    /* Bordes */
+    --csb-radius:               6px;
+    --csb-radius-lg:            12px;
+
+    /* Sombras */
+    --csb-shadow:               0 2px 8px rgba(0, 0, 0, 0.12);
+    --csb-shadow-lg:            0 4px 20px rgba(0, 0, 0, 0.18);
+
+    /* Transiciones */
+    --csb-transition:           0.25s ease;
+}
+
+/* ==========================================================================
+   Reset y base
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--csb-font-body);
+    font-size: var(--csb-font-size-base);
+    color: var(--csb-color-dark);
+    background-color: var(--csb-color-white);
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: var(--csb-color-primary);
+    text-decoration: none;
+    transition: color var(--csb-transition);
+}
+
+a:hover {
+    color: var(--csb-color-secondary);
+}
+
+/* ==========================================================================
+   Cabecera del sitio
+   ========================================================================== */
+.site-header {
+    background-color: var(--csb-color-primary);
+    color: var(--csb-color-white);
+    padding: var(--csb-spacing-sm) 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--csb-shadow);
+}
+
+.site-header .site-title a {
+    color: var(--csb-color-white);
+    font-family: var(--csb-font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.site-header .site-title a:hover {
+    color: var(--csb-color-secondary);
+}
+
+/* ==========================================================================
+   Navegación principal
+   ========================================================================== */
+.main-navigation {
+    background-color: var(--csb-color-dark);
+}
+
+.main-navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-navigation ul li a {
+    display: block;
+    padding: var(--csb-spacing-xs) var(--csb-spacing-sm);
+    color: var(--csb-color-white);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background-color var(--csb-transition), color var(--csb-transition);
+}
+
+.main-navigation ul li a:hover,
+.main-navigation ul li.current-menu-item > a {
+    background-color: var(--csb-color-primary);
+    color: var(--csb-color-secondary);
+}
+
+/* Sub-menús desplegables */
+.main-navigation ul ul {
+    display: none;
+    position: absolute;
+    background-color: var(--csb-color-primary);
+    min-width: 200px;
+    box-shadow: var(--csb-shadow-lg);
+    z-index: 200;
+    flex-direction: column;
+}
+
+.main-navigation ul li:hover > ul {
+    display: flex;
+}
+
+.main-navigation ul ul li a {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ==========================================================================
+   Hero / Banner principal
+   ========================================================================== */
+.csb-hero {
+    position: relative;
+    background-color: var(--csb-color-primary);
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+.csb-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35;
+}
+
+.csb-hero__content {
+    position: relative;
+    z-index: 2;
+    color: var(--csb-color-white);
+    padding: var(--csb-spacing-lg);
+}
+
+.csb-hero__title {
+    font-family: var(--csb-font-heading);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--csb-spacing-sm);
+    color: var(--csb-color-white);
+}
+
+.csb-hero__title span {
+    color: var(--csb-color-secondary);
+}
+
+.csb-hero__subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: var(--csb-spacing-md);
+}
+
+/* ==========================================================================
+   Secciones generales
+   ========================================================================== */
+.csb-section {
+    padding: var(--csb-spacing-lg) var(--csb-spacing-md);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.csb-section--bg {
+    background-color: var(--csb-color-light);
+    max-width: 100%;
+    padding: var(--csb-spacing-lg) var(--csb-spacing-md);
+}
+
+.csb-section__title {
+    font-family: var(--csb-font-heading);
+    font-size: 2rem;
+    color: var(--csb-color-primary);
+    margin-bottom: var(--csb-spacing-md);
+    padding-bottom: var(--csb-spacing-xs);
+    border-bottom: 3px solid var(--csb-color-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   Tarjetas de deportes (grid en inicio)
+   ========================================================================== */
+.csb-deportes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--csb-spacing-sm);
+    margin-top: var(--csb-spacing-md);
+}
+
+.csb-deporte-card {
+    background-color: var(--csb-color-primary);
+    color: var(--csb-color-white);
+    border-radius: var(--csb-radius-lg);
+    padding: var(--csb-spacing-md) var(--csb-spacing-sm);
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--csb-spacing-xs);
+    transition: transform var(--csb-transition), box-shadow var(--csb-transition);
+    box-shadow: var(--csb-shadow);
+}
+
+.csb-deporte-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--csb-shadow-lg);
+    color: var(--csb-color-secondary);
+}
+
+.csb-deporte-card__icon {
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.csb-deporte-card__name {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+}
+
+/* Colores por deporte */
+.csb-deporte-card--futbol  { background-color: var(--csb-futbol-color); }
+.csb-deporte-card--basquet { background-color: var(--csb-basquet-color); }
+.csb-deporte-card--voley   { background-color: var(--csb-voley-color); }
+.csb-deporte-card--patin   { background-color: var(--csb-patin-color); }
+.csb-deporte-card--padel   { background-color: var(--csb-padel-color); }
+
+/* ==========================================================================
+   Tarjetas de jugadores
+   ========================================================================== */
+.csb-players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--csb-spacing-sm);
+}
+
+.csb-player-card {
+    background: var(--csb-color-white);
+    border-radius: var(--csb-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--csb-shadow);
+    transition: transform var(--csb-transition), box-shadow var(--csb-transition);
+}
+
+.csb-player-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--csb-shadow-lg);
+}
+
+.csb-player-card__photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+}
+
+.csb-player-card__info {
+    padding: var(--csb-spacing-xs) var(--csb-spacing-sm);
+    background: var(--csb-color-primary);
+    color: var(--csb-color-white);
+}
+
+.csb-player-card__name {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.csb-player-card__position {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.csb-player-card__number {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--csb-color-secondary);
+    float: right;
+}
+
+/* ==========================================================================
+   Partidos / Fixtures
+   ========================================================================== */
+.csb-fixture {
+    background: var(--csb-color-white);
+    border-left: 4px solid var(--csb-color-primary);
+    border-radius: var(--csb-radius);
+    padding: var(--csb-spacing-sm);
+    margin-bottom: var(--csb-spacing-xs);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--csb-shadow);
+    transition: border-color var(--csb-transition);
+}
+
+.csb-fixture:hover {
+    border-color: var(--csb-color-secondary);
+}
+
+.csb-fixture__date {
+    font-size: 0.8rem;
+    color: #666;
+    min-width: 80px;
+}
+
+.csb-fixture__teams {
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+}
+
+.csb-fixture__score {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--csb-color-primary);
+    min-width: 60px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   Pie de página
+   ========================================================================== */
+.site-footer {
+    background-color: var(--csb-color-dark);
+    color: rgba(255,255,255,0.7);
+    padding: var(--csb-spacing-lg) var(--csb-spacing-md);
+    margin-top: var(--csb-spacing-xl);
+}
+
+.site-footer a {
+    color: var(--csb-color-secondary);
+}
+
+.site-footer a:hover {
+    color: var(--csb-color-white);
+}
+
+.site-footer__bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: var(--csb-spacing-md);
+    padding-top: var(--csb-spacing-sm);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* ==========================================================================
+   Identificadores de deporte en páginas internas
+   ========================================================================== */
+.deporte-futbol  .csb-section__title { border-color: var(--csb-futbol-color); }
+.deporte-basquet .csb-section__title { border-color: var(--csb-basquet-color); }
+.deporte-voley   .csb-section__title { border-color: var(--csb-voley-color); }
+.deporte-patin   .csb-section__title { border-color: var(--csb-patin-color); }
+.deporte-padel   .csb-section__title { border-color: var(--csb-padel-color); }
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+@media (max-width: 768px) {
+    .csb-hero {
+        min-height: 350px;
+    }
+
+    .main-navigation ul {
+        flex-direction: column;
+    }
+
+    .main-navigation ul ul {
+        position: static;
+        box-shadow: none;
+    }
+
+    .csb-deportes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .csb-fixture {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--csb-spacing-xs);
+    }
+}
+
+@media (max-width: 480px) {
+    .csb-deportes-grid {
+        grid-template-columns: 1fr;
+    }
+}
